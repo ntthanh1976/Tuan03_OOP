@@ -145,7 +145,6 @@ namespace KeThuaDaHinh
           
 
             ql.Xuat();
-
             Console.ReadLine();
         }
     }
