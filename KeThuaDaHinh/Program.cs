@@ -7,121 +7,80 @@ using System.Threading.Tasks;
 namespace KeThuaDaHinh
 {
 
-    //class DongVat {
-
-    //    protected string ten;
-    //    public virtual void keu() {
-    //        Console.WriteLine("Chua biet keu nhu the nao");
-    //    }
-    //}
-
-    class Meo  {
+    class DongVat {
         private string ten;
+        public DongVat() { }
+        public DongVat(string ten) {
+            this.ten = ten;
+        }
+        public virtual void keu() {
+            Console.WriteLine("Chua biet keu the nao.");
+        }      
+    }        
+
+    class Meo: DongVat  {        
         public Meo() { }
-        public Meo(string ten) {
-            this.ten = ten;
+        public Meo(string ten) : base(ten) {            
         }
-        public void keu() {
+        public override void keu() {
             Console.WriteLine("Meo meo....");
-        }
+        }      
+
     }
-    class Cho 
+    class Cho : DongVat
     {
-        private string ten;
         public Cho() { }
-        public Cho(string ten)
-        {
-            this.ten = ten;
+        public Cho(string ten):base(ten)
+        {          
         }
-        public void keu()
+        public override void keu()
         {
             Console.WriteLine("Gau Gau....");
-        }
+        }        
     }
-    class Ga
-    {
-        private string ten;
+    class Ga: DongVat
+    {        
         public Ga() { }
-        public Ga(string ten)
-        {
-            this.ten = ten;
+        public Ga(string ten):base(ten)
+        {          
         }
-        public void keu()
+        public override void keu()
         {
             Console.WriteLine("Chip chip....");
-        }
+        }       
     }
 
     class QuanLyVatNuoi
     {
 
-        private Meo[] dsMeo;
-        private int soluongmeo;
-        private Cho[] dsCho;
-        private int soluongcho;
-        private Ga[] dsGa;
-        private int soluongga;
+        private DongVat[] dsvatnuoi;
+        private int soluong;
 
         public QuanLyVatNuoi()
         {
-            dsMeo = new Meo[5];
-            dsCho = new Cho[15];
-            dsGa = new Ga[10];
+            dsvatnuoi = new DongVat[30];
         }
 
-        public void ThemGa(Ga ga) {
+        public void Them(DongVat dv) {
             // cai dat lenh them ga vao mang dsGa
-            if (soluongga >= dsGa.Length)
+            if (soluong >= dsvatnuoi.Length)
             {
-                Console.WriteLine("Het chuong nuoi ga");
+                Console.WriteLine("Het chuong nuoi");
             }
             else
             {
-                dsGa[soluongga++] = ga;
+                dsvatnuoi[soluong++] = dv;
             }
         }
-        public void ThemCho(Cho cho)
-        {
-            //cai dat lenh them cho vao mang dsCho
-            if (soluongcho >= dsCho.Length)
-            {
-                Console.WriteLine("Het chuong nuoi cho");
-            }
-            else
-            {
-                dsCho[soluongcho++] = cho;
-            }
-        }
-        public void ThemMeo(Meo meo)
-        {
-            //cai dat lenh them meo vao mang dsMeo
-            if (soluongmeo >= dsMeo.Length)
-            {
-                Console.WriteLine("Het chuong nuoi meo");
-            }
-            else
-            {
-                dsMeo[soluongmeo++] = meo;
-            }
-        }
-
+        
         public void Xuat()
         {
-            //chó keu
-            for (int i = 0; i < soluongcho; i++)
+            //chó keu, mèo kêu ,gà kêu            
+            Console.WriteLine("***Vat nuoi keu:");
+            for (int i = 0; i < soluong; i++)
             {
-                dsCho[i].keu();
-            }
-            //gà keu
-            for (int i = 0; i < soluongga; i++)
-            {
-                dsGa[i].keu();
-            }
-            //mèo kêu
-            for (int i = 0; i < soluongmeo; i++)
-            {
-                dsMeo[i].keu();
-            }
+                dsvatnuoi[i].keu();
+            }           
         }       
 
     }
@@ -131,18 +90,20 @@ namespace KeThuaDaHinh
         static void Main(string[] args)
         {
             QuanLyVatNuoi ql = new QuanLyVatNuoi();
-            ql.ThemCho(new Cho("Lucky"));
-            ql.ThemCho(new Cho("Bach bao"));
+            ql.Them(new Cho("Lucky"));
+            ql.Them(new Cho("Bach bao"));
+           
 
-            ql.ThemGa(new Ga("Ga 1"));
-            ql.ThemGa(new Ga("Ga 2"));
-            ql.ThemGa(new Ga("Ga 3"));
+            ql.Them(new Ga("Ga 1"));
+            ql.Them(new Ga("Ga 2"));
+            ql.Them(new Ga("Ga 3"));
 
-            ql.ThemMeo(new Meo("Meo 1"));
-            ql.ThemMeo(new Meo("Meo 2"));
-            ql.ThemMeo(new Meo("Meo 3"));
-            ql.ThemMeo(new Meo("Meo 4"));
-          
+            ql.Them(new Meo("Meo 1"));
+            ql.Them(new Meo("Meo 2"));
+            ql.Them(new Meo("Meo 3"));
+            ql.Them(new Meo("Meo 4"));
+                  
+
 
             ql.Xuat();
             Console.ReadLine();
